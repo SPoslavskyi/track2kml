@@ -10,15 +10,24 @@ trk_time = ""
 coord = ""
 ltime = ""
 fistLine = True
-doc = KML.kml(KML.Document())
+doc = KML.kml(
+    KML.Document(
+        KML.Style(
+            KML.LineStyle(
+                KML.color('ff00ff00')
+            ),
+            id='track'
+        )
+    )
+)
 
 
 def add_line(trk_time, coord):
     global doc
     trk_line = KML.Placemark(
         KML.name(trk_time),
+        KML.styleUrl('#track'),
         KML.LineString(
-            KML.extrude(True),
             KML.altitudeMode('clampToGround'),
             KML.coordinates(
                 coord
