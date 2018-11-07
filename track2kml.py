@@ -1,5 +1,6 @@
 from lxml import etree
 from pykml.factory import KML_ElementMaker as KML
+import math
 
 trk_file = "./tracks.txt"
 
@@ -27,13 +28,19 @@ def add_line(trk_time, coord):
     doc.Document.append(trk_line)
 
 
+def deg_conv(num):
+    mnt, deg = math.modf(float(num))
+    mnt = mnt*100/60
+    return str(deg+mnt)
+
+
 for line in track:
     line = line[:-1]
     pnt = line.split(" ")
     sid = pnt[0]
     time = pnt[1]
-    lat = pnt[2]
-    lon = pnt[3]
+    lat = deg_conv(pnt[2])
+    lon = deg_conv(pnt[3])
     if fistLine:
         last_sid = sid
         trk_time = time
