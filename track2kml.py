@@ -43,12 +43,13 @@ for line in track:
         ltime = time
     else:
         trk_time += " - " + ltime
-        add_line(last_sid, coord)
+        add_line(trk_time, coord)
         last_sid = sid
         trk_time = time
         coord = ""
 if coord != "":
-    add_line(last_sid, coord)
+    trk_time += " - " + ltime
+    add_line(trk_time, coord)
 
 
 xml = etree.tostring(doc, pretty_print=True)
